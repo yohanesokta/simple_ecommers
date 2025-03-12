@@ -24,3 +24,32 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+.loader {
+  margin: 20px auto;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: animloader 1s linear infinite;
+}
+
+@keyframes animloader {
+  0% {
+    box-shadow: -72px 0 #454545 inset;
+  }
+  100% {
+    box-shadow: 48px 0 #454545 inset;
+  }
+}
+.loading {
+  animation: load 1s infinite;
+}
+
+@keyframes load {
+  from,to{
+    opacity: .7;
+  }50% {
+    opacity: .2;
+  }
+}
