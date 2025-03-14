@@ -13,7 +13,8 @@ const nextConfig = {
             port : "",
             search : ""
         }]
-    }
+    },
+    devIndicators:false
 };
 
 export default nextConfig;

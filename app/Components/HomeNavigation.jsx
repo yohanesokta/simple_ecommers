@@ -37,10 +37,10 @@ export const HomeNavigation = (props) => {
 
                 {ViewProfile ? (
                   <div className="w-30  z-50 absolute top-10 right-5 rounded-sm bg-white shadow-2xs border-2 border-gray-200">
-                    <ul className="p-2 text-sm font-bold flex flex-col gap-3">
+                    <ul className="p-2  text-sm font-bold flex flex-col gap-3">
                       <li>Profile</li>
-                      <li>Toko</li>
-                      <li>Keranjang</li>
+                      <li><a href="/toko" >Toko</a></li>
+                      <li><a href="/kurir" >Daftar Kurir</a></li>
                       <li>
                         <a href="/auth/logout">Logout</a>
                       </li>
@@ -84,7 +84,7 @@ export const HomeNavigation = (props) => {
           <>
             <a
               href=""
-              className="flex flex-col justify-center items-center text-sm"
+              className="cursor-pointer flex flex-col justify-center items-center text-sm"
             >
               <AiOutlineShoppingCart className="text-2xl" /> Keranjang
             </a>

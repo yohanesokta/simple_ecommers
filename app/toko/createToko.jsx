@@ -32,13 +32,12 @@ export const CreateToko = ({data_toko}) => {
   }
 
   async function imageUpdate(element) {
+    SetLoad("loading")
     const image = element.target.files[0]
     const imageLowSize = await imageCompression(image,{
       maxSizeMB : 500, maxWidthOrHeight : 800 , useWebWorker : true
     })
-    SetLoad("loading")
-    SetImageURL(URL.createObjectURL(imageLowSize))
-    const upload = await uploadFoto(image)
+    const upload = await uploadFoto(imageLowSize)
     if (upload) {
       SetLoad("")
       SetImageURL(upload)
@@ -54,7 +53,7 @@ export const CreateToko = ({data_toko}) => {
       ImageURL
   )
   if (submit) {
-    window.location.href = "/"
+    window.location.href = "/toko"
   } else {
     showError()
   }

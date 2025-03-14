@@ -16,7 +16,7 @@ datasource db {
 enum Role {
   user
   admin
-  courer
+  driver
 }
 enum Status {
   success
@@ -38,11 +38,16 @@ model User {
   alamat_toko String @default("")
   picture_toko String @default("")
 
+  name_driver String @default("")
+  number_driver String @default("")
+  driver_ready Boolean @default(true)
 }
 
 
 model Product {
   id String @id @default(uuid()) @db.Uuid
+  user_id String
+  email_id String
   name String
   desc String
   price Int
@@ -53,7 +58,11 @@ model Product {
 
 model ticket {
   id  Int @id @default(autoincrement())
-  product_id String 
+  product_id String
   user_id String
   status Status
+}
+
+model carts {
+  id Int @id @default(autoincrement())
 }

@@ -39,3 +39,20 @@ export async function addToko(token,name_toko,desc_toko,alamat_toko,picture_toko
     }
     
 }
+
+export async function getDataMyProduct(token){
+    try {
+        let userdata = jwt.decode(token)
+        userdata = await prisma.user.findFirst({where : {
+            email : userdata.email
+        }})
+        const data = await prisma.product.findMany({
+            where : {user_id : userdata.id}
+        })
+        console.log(data)
+        return data
+    } catch(error){
+        console.log("error",error)
+        return false
+    }
+}

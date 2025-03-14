@@ -4,10 +4,19 @@ import { HomeNavigation } from "./Components/HomeNavigation";
 import { AiOutlineSearch } from "./Components/ReactIcons";
 import Image from "next/image";
 import { userGetData } from "./auth/middleware/userGetData";
+import { PublicProduct } from "./utils/public_handle";
 export default function  Home () {
   const [Userdata,SetUserdata] = useState()
+  const [ProductData,SetProductData] = useState([])
+
   useEffect(()=>{
     userGetData(SetUserdata,localStorage.getItem("token"))
+    PublicProduct().then((element)=>{
+      if (element){
+        console.log(element)
+        SetProductData(element)
+      }
+    })
   },[])
   return (<>
     <HomeNavigation userdata={Userdata}  home={true}>
@@ -25,25 +34,17 @@ export default function  Home () {
             <button className="p-1 px-5 bg-white rounded-xl text-sm border-1 border-gray-300">Snack</button>
           </div>
           <h1 className="my-5">Featured Product</h1>
-
           <div className="m-auto justify-between w-90 max-w-screen flex gap-2 flex-wrap">
-            <div className="w-40 h-60 relative overflow-hidden bg-white border-2 border-gray-200 rounded-xl">
-              <Image className="w-full h-35 object-cover" src="/img/makanan.jpeg" width={100} height={100} alt="Image"/>
-              <p className="m-2 text-[8pt] font-bold max-h-8 overflow-hidden">Warung Sambal Nyos Asli Enak Lorem ipsum dolor</p>
-              <span className="mx-2 mt-0 p-0 text-[9pt] font-semibold text-green-900">Rp 10.000</span>
+          
+          
+          {ProductData.map((element,index) =>{
+            return <div key={String(index)} onClick={()=>{window.location.href = `/view/${element.id}`}} className="w-40 h-60 relative overflow-hidden bg-white border-2 border-gray-200 rounded-xl">
+              <img className="w-full h-35 object-cover" src={element.picture} width={100} height={100} alt="Image"/>
+              <p className="m-2 text-[10pt] font-bold max-h-10 overflow-hidden">{element.name}</p>
+              <span className="mx-2 mt-0 p-0 text-[10pt] font-semibold text-green-900">Rp {element.price}</span>
             </div>
+          })}
 
-            <div className="w-40 h-60 relative overflow-hidden bg-white border-2 border-gray-200 rounded-xl">
-              <Image className="w-full h-35 object-cover" src="/img/makanan.jpeg" width={100} height={100} alt="Image"/>
-              <p className="m-2 text-[8pt] font-bold max-h-8 overflow-hidden">Warung Sambal Nyos Asli Enak Lorem ipsum dolor</p>
-              <span className="mx-2 mt-0 p-0 text-[9pt] font-semibold text-green-900">Rp 10.000</span>
-            </div>
-
-            <div className="w-40 h-60 relative overflow-hidden bg-white border-2 border-gray-200 rounded-xl">
-              <Image className="w-full h-35 object-cover" src="/img/makanan.jpeg" width={100} height={100} alt="Image"/>
-              <p className="m-2 text-[8pt] font-bold max-h-8 overflow-hidden">Warung Sambal Nyos Asli Enak Lorem ipsum dolor</p>
-              <span className="mx-2 mt-0 p-0 text-[9pt] font-semibold text-green-900">Rp 10.000</span>
-            </div>
           </div>
         </div>
       </div>
