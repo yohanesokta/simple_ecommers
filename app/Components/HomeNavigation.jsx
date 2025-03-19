@@ -2,6 +2,7 @@
 import { useState } from "react";
 import {
   AiFillBell,
+  AiFillCar,
   AiFillHome,
   AiOutlineShoppingCart,
   BsArchiveFill,
@@ -36,13 +37,20 @@ export const HomeNavigation = (props) => {
                 </span>
 
                 {ViewProfile ? (
-                  <div className="w-30  z-50 absolute top-10 right-5 rounded-sm bg-white shadow-2xs border-2 border-gray-200">
-                    <ul className="p-2  text-sm font-bold flex flex-col gap-3">
-                      <li>Profile</li>
+                  <div className="fixed w-screen h-screen top-15 left-0 flex  z-50 bg-white p-3">
+                    <ul className="p-2 text-md  w-full font-bold flex flex-col gap-3">
+                      <li className="w-full">Profile</li>
+                      <li className="w-full">
+                        <a className="w-full" href="/pembelian"><p>Pembelian</p></a>
+                      </li>
+
                       <li><a href="/toko" >Toko</a></li>
-                      <li><a href="/kurir" >Daftar Kurir</a></li>
-                      <li>
-                        <a href="/auth/logout">Logout</a>
+                      {(props.userdata?.data.role != "driver") ? 
+                      
+                      <li><a href="/kurir" >Daftar Kurir</a></li> :""
+                    }
+                      <li className="w-full">
+                        <a className="w-full" href="/auth/logout"><p>Logout</p></a>
                       </li>
                     </ul>
                   </div>
@@ -83,10 +91,10 @@ export const HomeNavigation = (props) => {
         {props.userdata?.data ? (
           <>
             <a
-              href=""
+              href="/pembelian"
               className="cursor-pointer flex flex-col justify-center items-center text-sm"
             >
-              <AiOutlineShoppingCart className="text-2xl" /> Keranjang
+              <AiOutlineShoppingCart className="text-2xl" /> Pembelian
             </a>
             <a
               href="/toko"
@@ -94,6 +102,14 @@ export const HomeNavigation = (props) => {
             >
               <BsArchiveFill className="text-2xl" /> Toko
             </a>
+          {(props.userdata.data.role == "driver") ? 
+            <a
+              href="/kurir/tabel"
+              className="flex flex-col justify-center items-center text-sm"
+            >
+              <AiFillCar className="text-2xl" /> Kurir
+            </a> : ""
+        }
           </>
         ) : (
           ""

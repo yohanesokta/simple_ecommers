@@ -24,7 +24,8 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
-.loader {
+
+/* .loader {
   margin: 20px auto;
   width: 48px;
   height: 48px;
@@ -41,15 +42,48 @@ body {
   100% {
     box-shadow: 48px 0 #454545 inset;
   }
+} */
+
+.loader {
+  margin: 20px auto;
+
+  width: 48px;
+  height: 48px;
+  background: #fff;
+  border-radius: 50%;
+  position: relative;
+  animation: skLinRotate 1s ease-in-out infinite alternate;
 }
+
+.loader:after {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border-radius: 50%;
+  border: 5px solid transparent;
+  border-top-color: #ff3d00;
+}
+
+@keyframes skLinRotate {
+
+  95%,
+  100% {
+    transform: rotate(840deg)
+  }
+}
+
 .loading {
   animation: load 1s infinite;
 }
 
 @keyframes load {
-  from,to{
+
+  from,
+  to {
     opacity: .7;
-  }50% {
+  }
+
+  50% {
     opacity: .2;
   }
 }

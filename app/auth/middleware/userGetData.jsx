@@ -1,5 +1,6 @@
 "use client"
 import { userMiddleware } from "./user"
+
 export const userGetData = (SetUserdata,token)=>{
     if (token) {
       userMiddleware(token).then((element)=>{

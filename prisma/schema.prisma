@@ -58,9 +58,17 @@ model Product {
 
 model ticket {
   id  Int @id @default(autoincrement())
-  product_id String
   user_id String
+  driver_id String
+  driver_number String @default("")
+  product_id String
+  pruduct_image String
+  product_name String
+  user_alamat String
+  user_number String @default("")
   status Status
+  time DateTime @default(now())
+  update DateTime @updatedAt @default(now())
 }
 
 model carts {

@@ -3,12 +3,11 @@ import {useState , useEffect} from "react"
 import { AiFillHome, AiFillPlusCircle, AiOutlineShoppingCart, BsArrowLeft } from "@/app/Components/ReactIcons"
 import { GetProductDetail } from "./handle"
 export default function Page (params) {
-    const [Name,SetName] = useState("")
     const [ProductData,SetProductData] = useState([])
-
+    const [Token,SetToken] = useState("")
     useEffect(()=>{
+      SetToken(localStorage.getItem("token") || "")
       params.params.then((e)=>{
-        SetName(e.productId)
         GetProductDetail(e.productId).then((element)=>{
           console.log(element)
           if (element) {
@@ -46,8 +45,18 @@ export default function Page (params) {
         </div>
         <div className="h-12 w-full"></div>
         <footer className="fixed w-full px-4 py-1 gap-2 justify-between h-12 bg-white bottom-0 flex">
-          <button className="border-1 px-5 rounded bg-white font-bold text-xl"><AiOutlineShoppingCart/></button>
-          <button className="flex-1 bg-black rounded text-white">Buy Now</button>
+          {(Token) ? 
+          
+        <>
+          <a href={"/pembelian"} className="border-1 px-5 text-center justify-center items-center flex rounded bg-white font-bold text-xl"><AiOutlineShoppingCart/></a>
+          <a href={`/product/buy/${ProductData.data?.id || ""}`} className="flex-1 flex justify-center items-center bg-black rounded text-white">Buy Now</a>
+        </> : 
+         <>
+         <a href="/" className="flex justify-center items-center border-1 px-5 rounded bg-white font-bold text-xl"><AiFillHome/></a>
+         <a href="/auth/login" className="flex-1 flex justify-center items-center bg-black rounded text-white">Login</a>
+       </>
+         }
+
         </footer>
     </>
 }
