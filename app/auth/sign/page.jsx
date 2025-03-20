@@ -3,11 +3,14 @@ import Link from "next/link"
 import { AiOutlineUser, BsLockFill, IoMdArrowRoundBack } from "@/app/Components/ReactIcons"
 import { useRef, useState } from "react"
 import { signHandle } from "./handle"
+import { LoaderComponent } from "@/app/product/buy/[productId]/searchingDriver"
 export default function Page() {
     const emailRef = useRef()
     const passwordRef = useRef()
     const repasswordRef = useRef()
     const [Broker,SetBroker] = useState("")
+    const [Loadiing,SetLoading] = useState(false)
+
 
     function BrokerMessage(message){
         SetBroker(message);
@@ -18,7 +21,9 @@ export default function Page() {
 
     async function SubmitHandle(event) {
         event.preventDefault()
+        SetLoading(true)
         const status = await signHandle(emailRef.current.value,passwordRef.current.value,repasswordRef.current.value)
+        SetLoading(false)
         if (status.status) {
             window.location.href = "/auth/login"
         } else {
@@ -31,6 +36,8 @@ export default function Page() {
             <nav className="p-3 bg-white border-b-1 border-gray-500">
                 <Link href="/auth/login" className="flex gap-2 items-center text-xl">  <IoMdArrowRoundBack/> Sign </Link>
             </nav>
+            <h1 className="text-center font-bold text-3xl p-5">Camilan <span className="text-red-400">99</span></h1>
+
             <form onSubmit={SubmitHandle} className="m-auto p-4 flex flex-col gap-3 bg-white">
                 <div className="flex gap-2 items-cente p-3 border-b-1 border-gray-400">
                     <AiOutlineUser/>
@@ -54,7 +61,9 @@ export default function Page() {
 
             </form>
 
-
+{(Loadiing) ? 
+            <LoaderComponent text="Please wait.."/> : ""
+            }
             <footer className=""></footer>
         </div> 
     </>)

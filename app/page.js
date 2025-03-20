@@ -20,7 +20,7 @@ export default function  Home () {
     })
   },[])
   return (<>
-    <HomeNavigation userdata={Userdata}  home={true}>
+    <HomeNavigation userdata={Userdata}  >
       <div className="w-full p-4">
         <div className="flex shadow-md shadow-gray-300 px-2 py-3 items-center w-full rounded border-neutral-400 bg-white focus-within:shadow-gray-500">
           <input onKeyUp={(event)=>{SetSearch(event.target.value)}} type="text" name="" id="" className="px-2 flex-1 border-0 outline-0"  placeholder="Search Product"/>

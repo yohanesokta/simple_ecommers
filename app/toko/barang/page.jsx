@@ -7,9 +7,11 @@ import { userGetData } from "@/app/auth/middleware/userGetData"
 import Image from "next/image"
 import { uploadFoto } from "../handle";
 import { addProduct } from "./handle";
+import { LoaderComponent } from "@/app/product/buy/[productId]/searchingDriver";
 const page = () => {
     const [Userdata,SetUserData] = useState()
     const [ImageURL,SetImageUrl] = useState()
+    const [Loadiing,SetLoading] = useState(false)
     const [OnLoad,SetLoad] = useState("")
     const product_name  = useRef()
     const price = useRef()
@@ -35,6 +37,7 @@ const page = () => {
   }
 
  async function submit (event) {
+    SetLoading(true)
     event.preventDefault();
     if (ImageURL,product_name.current.value,price.current.value,desc.current.value,category.current.value,stock.current.value) {
         const status = await addProduct(
@@ -46,6 +49,8 @@ const page = () => {
             price.current.value,
             stock.current.value
         )
+        SetLoading(false)
+
         if (status) {
             window.location.href = "/toko"
         }
@@ -87,6 +92,9 @@ const page = () => {
 
         <button className="p-3 bg-black text-white w-full my-8 rounded">Tambah Produk</button>
     </form>
+    {(Loadiing) ? 
+            <LoaderComponent text="Please wait.."/> : ""
+            }
     </HomeNavigation>
   )
 }

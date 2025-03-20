@@ -6,10 +6,12 @@ import { getPembelian } from "./handle"
 import { convertIndonesianNumber, formated_date } from "../utils/client_utility"
 const page = () => {
     const [Userdata,SetUserData] = useState()
+    const [Onload,SetOnload] = useState(true)
     const [DataPembelian,SetDataPembelian] = useState([])
     useEffect(()=>{
         userGetData(SetUserData,localStorage.getItem("token"))
         getPembelian(localStorage.getItem("token")).then((element)=>{
+            SetOnload(false)
             if (element) {
                 SetDataPembelian(element)
             }
@@ -18,6 +20,20 @@ const page = () => {
 
   return (
     <HomeNavigation userdata={Userdata}>
+        <div className="flex flex-col w-full">
+        {(Onload)?
+        
+            <div role="status" className="p-10 space-y-8 animate-pulse md:space-y-0 md:space-x-8 rtl:space-x-reverse md:flex md:items-center">
+                <div className="w-full">
+                    <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                    <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[480px] mb-2.5"></div>
+                    <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                    <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[440px] mb-2.5"></div>
+                    <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[460px] mb-2.5"></div>
+                    <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
+                </div>
+                <span className="sr-only">Loading...</span>
+            </div> : 
         <div  className="p-4  w-full flex flex-col gap-3">
             {DataPembelian?.length == 0 && <p className="text-center text-gray-500">Belum ada pembelian</p>}
             {DataPembelian?.map((element,index) => {
@@ -38,7 +54,11 @@ const page = () => {
             })}
 
         </div>
+    }        
         
+
+
+        </div>  
 
     </HomeNavigation>
   )
