@@ -51,7 +51,7 @@ export default function Page (params) {
               <p className="text-gray-700">{ProductData.toko?.desc_toko || ""}</p>
             </div>
           </div>
-          <h1 className="font-semibold py-4">Description</h1>
+          <h1 className="font-bold py-4">Description</h1>
           <p>{ProductData.data?.desc || ""}.</p>
         </div>
 

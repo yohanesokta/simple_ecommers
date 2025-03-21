@@ -30,8 +30,7 @@ export async function addToko(token,name_toko,desc_toko,alamat_toko,picture_toko
                 alamat_toko,
                 picture_toko
             }
-        } )
-
+        })
         return true
     } catch (error) {
         console.log(error)

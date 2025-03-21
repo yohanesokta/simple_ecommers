@@ -82,7 +82,7 @@ export default function page () {
   
   return (
       <div className="w-full h-30 px-4 py-5">
-        <h1 className="text-xl">Buat Toko</h1>
+        <h1 className="text-xl">Edit Toko</h1>
         <form onSubmit={submitingAction} onChange={CheckValue} action="" className="py-4 flex flex-col gap-3 w-full">
           <div className="flex gap-2">
 
@@ -93,8 +93,13 @@ export default function page () {
               <input onChange={imageUpdate} className="hidden" id="file" name="file" type="file" />
             </div>
           </div>
+          <label className="px-3 py-2">Nama Toko</label>
           <input ref={namatokoRef} required className="bg-gray-100 rounded-md text-black  p-3 pl-4 " type="text" placeholder="Nama Toko" />
-          <textarea ref={desctokoRef} required className="bg-gray-100 rounded-md text-black  p-3 pl-4 " type="text" placeholder="Descripsi Toko" />
+          <label className="px-3 py-2">Deskripsi Toko</label>
+
+          <textarea ref={desctokoRef} required className="bg-gray-100 rounded-md text-black  p-3 pl-4" type="text" placeholder="Descripsi Toko" />
+          <label className="px-3 py-2 ">Alamat Toko</label>
+
           <textarea ref={alamattokoRef} required className="bg-gray-100 rounded-md text-black  p-3 pl-4 " type="text" placeholder="Alamat Toko" />
           {(OnError) ?
             <p className="text-red-500">Gagal melakukan update toko</p> : ""
