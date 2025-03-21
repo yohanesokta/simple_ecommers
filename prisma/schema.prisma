@@ -51,7 +51,7 @@ model Product {
   email_id String
   name String
   desc String
-  price Int
+  price String
   picture String
   category String
   quantity Int

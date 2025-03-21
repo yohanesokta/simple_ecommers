@@ -11,7 +11,7 @@ export async function GetProductDetail(product_id){
         })
         
 
-        console.log(toko)
+        console.log(data)
         return {data,toko}
     } catch (error){
         return data

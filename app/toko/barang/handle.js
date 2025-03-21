@@ -13,7 +13,7 @@ export const addProduct = async (token,name,category,desc,picture,price,quantity
             category,
             desc,
             picture,
-            price : parseInt(price),
+            price,
             quantity : parseInt(quantity)
         }})
 

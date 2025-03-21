@@ -5,11 +5,13 @@ import { GetProductDetail } from "./handle"
 export default function Page (params) {
     const [ProductData,SetProductData] = useState([])
     const [Token,SetToken] = useState("")
+    const [OnLoading,SetLoading] = useState(true)
     useEffect(()=>{
       SetToken(localStorage.getItem("token") || "")
       params.params.then((e)=>{
         GetProductDetail(e.productId).then((element)=>{
-          console.log(element)
+          SetLoading(false)
+          
           if (element) {
             SetProductData(element)
 
@@ -27,7 +29,16 @@ export default function Page (params) {
             </a>
         </nav>
         <div className="h-14"></div>
-        <img className="w-full h-60 object-cover" src={ProductData?.data?.picture || "/img/dummy.png"} width={200} height={200} alt="image"/> 
+
+        {(OnLoading)?
+        <div className="w-full p-2 ">
+        <div className="w-full h-50 bg-neutral-500 loading rounded-2xl"></div>
+        <div className="w-full my-2 h-10 bg-neutral-500 loading rounded"></div>
+        <div className="w-20 my-2 h-5 bg-neutral-500 loading rounded"></div>
+        <div className="w-40 my-2 h-5 bg-neutral-500 loading rounded"></div>
+      </div> : 
+      <>
+      <img className="w-full h-60 object-cover" src={ProductData?.data?.picture || "/img/dummy.png"} width={200} height={200} alt="image"/> 
         <div className="p-4">
           <h1 className="font-bold text-2xl">{ProductData.data?.name || ""}</h1>
           <h2 className="my-2 font-semibold text-green-800 text-xl">Rp {ProductData.data?.price || ""}</h2>
@@ -40,9 +51,17 @@ export default function Page (params) {
               <p className="text-gray-700">{ProductData.toko?.desc_toko || ""}</p>
             </div>
           </div>
-          <h1 className="font-semibold">Description</h1>
+          <h1 className="font-semibold py-4">Description</h1>
           <p>{ProductData.data?.desc || ""}.</p>
         </div>
+
+      </>
+
+        }
+        
+
+        
+
         <div className="h-12 w-full"></div>
         <footer className="fixed w-full px-4 py-1 gap-2 justify-between h-12 bg-white bottom-0 flex">
           {(Token) ? 

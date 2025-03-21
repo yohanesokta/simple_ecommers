@@ -16,7 +16,7 @@ export const HomeNavigation = (props) => {
     <div className="flex flex-col h-screen">
       <nav className="w-full h-18 bg-white border-1 items-center justify-between border-gray-300 text-gray-600 flex">
         <div className="m-4">
-          <span className="font-bold">Camilan 99</span>
+          <span className="font-bold text-black">Camilan <span className="text-red-500">99</span></span>
         </div>
 
         <div className=" h-10 m-4 flex">
