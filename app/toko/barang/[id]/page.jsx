@@ -42,13 +42,15 @@ const page = ({params}) => {
     }
 
     async function  handleDelete() {
-        SetLoading(true)
-        const action = await deleteProduct(Product?.data?.id);
-        SetLoading(false)
-        if (action) {
-            window.location.href = "/toko"
-        } else {
-            window.alert("Internal Server Error!")
+        if (confirm("Apakah Anda Yakin? ")) {
+            SetLoading(true)
+            const action = await deleteProduct(Product?.data?.id);
+            SetLoading(false)
+            if (action) {
+                window.location.href = "/toko"
+            } else {
+                window.alert("Internal Server Error!")
+            }
         }
     }
 

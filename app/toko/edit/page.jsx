@@ -3,7 +3,7 @@ import { useState , useRef, useEffect} from "react"
 import { addToko, uploadFoto } from "../handle"
 import imageCompression from 'browser-image-compression';
 import { userGetData } from "@/app/auth/middleware/userGetData";
-import { getTokoData } from "./handle";
+import { deleteToko, getTokoData } from "./handle";
 import { LoaderComponent } from "@/app/product/buy/[productId]/searchingDriver";
 
 
@@ -67,7 +67,19 @@ export default function page () {
     
   }
 
+  async function hapus() {
+    const token = localStorage.getItem("token")
+    if (confirm("Apakah Anda Yakin?")){
+      SetLoading(true)
+      const action = await deleteToko(token)
+      SetLoading(false)
+      if (action) {
+        window.location.href = "/toko"
+      }
 
+    }
+  }
+  
   useEffect(()=>{
     getTokoData(localStorage.getItem("token")).then((data)=>{
       SetLoading(false)
@@ -105,6 +117,8 @@ export default function page () {
             <p className="text-red-500">Gagal melakukan update toko</p> : ""
            }
         <button ref={buttonRef} className={`p-2 text-white font-bold rounded-md ${(Saving) ? "bg-amber-500" : "bg-amber-200"}`}>Simpan Toko</button>
+        <button onClick={hapus} type="button" ref={buttonRef} className={`p-2 mt-4 text-white font-bold rounded-md ${(Saving) ? "bg-red-600" : "bg-amber-200"}`}>Hapus Toko</button>
+        
         </form>
           {(Loading) ? 
         <LoaderComponent/> : ""
