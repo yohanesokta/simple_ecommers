@@ -40,15 +40,15 @@ export default function  Home () {
           <div className="m-auto justify-between w-full max-w-screen flex gap-2 flex-wrap">
           {(LoadingData)?
            <>{ProductData.filter((element) => (element.name.toLowerCase().includes(Search.toLowerCase()))).map((element,index) =>{
-            return <div key={String(index)} onClick={()=>{window.location.href = `/product/${element.id}`}} className="w-[45%] pb-2 relative overflow-hidden bg-white border-2 border-gray-200 rounded-xl">
+            return <div key={String(index)} onClick={()=>{window.location.href = `/product/${element.id}`}} className="w-[45%] pb-9 relative overflow-hidden bg-white border-2 border-gray-200 rounded-xl">
               <img className="w-full h-35 object-cover" src={element.picture} width={100} height={100} alt="Image"/>
               <p className="m-2 text-[10pt] font-bold max-h-10 overflow-hidden">{element.name}</p>
               <p className="text-[8pt] px-2 text-neutral-600 h-8 overflow-hidden">{element.desc}</p>
-              <div className="flex relative">
-              <p className="mx-2 mt-2 text-[12pt] font-semibold text-green-900"><span className="font-semibold text-sm">Rp</span>  {element.price}</p>
-              <p className="m-2 absolute right-0 text-[8pt] bg-red-500 px-[10px] py-[1px] font-bold text-white">COD</p>
+              <div className="flex justify-between relative items-center">
+                <p className="mx-2 text-[12pt] font-semibold text-green-900"><span className="font-semibold text-sm">Rp</span>  {element.price}</p>
+                <p className="m-2 right-0 border-1 border-amber-400 text-[8pt] bg-red-500 px-[10px] py-[1px] font-bold text-white">COD</p>
               </div>
-              <div className="flex px-2 my-1">
+              <div className="flex absolute border-0 px-2 my-1">
                 <p className="text-[8pt] py-[2px] px-2 rounded text-white bg-neutral-700">{element.category}</p>
               </div>
             </div>
